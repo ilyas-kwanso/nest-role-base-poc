@@ -39,7 +39,7 @@ export class AuthService {
     if (isUserExist) {
       throw new BadRequestException(authConstants.emailAlreadyExist);
     }
-    const user = new User(data);
+    const user = new User({ role, ...data });
     await this.userRepository.save(user);
     const payload = {
       sub: user.id,
